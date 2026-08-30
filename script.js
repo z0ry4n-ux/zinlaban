@@ -12,7 +12,8 @@
    7. Story mascot
    8. Video
    9. OUR COLLECTION
-   10. Mascot floating
+   10. OUR LOCATION
+   11. Mascot floating
 
    COLLECTIONS
 
@@ -27,11 +28,14 @@
    TOTAL PRODUCTS: 22
 
    NOTE:
-   OUR LOCATION now represents a single ZIN LABAN
-   location. There is no multi-store search/filter
-   logic — the map area is static and the
-   "Open in Google Maps" links/buttons point directly
-   to the store's Google Maps page.
+   OUR LOCATION lists the two real ZIN LABAN shops
+   (Karuvarakundu and Kalikavu). Clicking a shop in
+   the list highlights it and swaps the embedded
+   Google Map on the right to that shop's location,
+   updating the "Open in Google Maps" link to its
+   real Maps URL. A separate franchise-enquiry phone
+   number is shown below the shop list (no map, since
+   no location was provided for it).
    ========================================================= */
 
 (function () {
@@ -142,6 +146,11 @@
       safe(
         "collection",
         initCollection
+      );
+
+      safe(
+        "location",
+        initLocation
       );
 
       safe(
@@ -1999,7 +2008,235 @@
 
 
   /* =========================================================
-     10. MASCOT FLOAT
+     10. OUR LOCATION
+     ========================================================= */
+
+  /*
+     REAL ZIN LABAN SHOP DATA — exactly two shops.
+
+     mapQuery is only used to render the embedded
+     Google Maps iframe on the right (a plain
+     place-name search — no API key, no invented
+     coordinates or address, since Google does not
+     allow embedding maps.app.goo.gl / share.google
+     short links directly as an iframe src).
+
+     mapsUrl is the exact Google Maps link supplied
+     for that shop and is what "Open in Google Maps"
+     actually points to.
+  */
+
+  const stores = [
+
+    {
+      id: 1,
+
+      name: "Karuvarakundu",
+
+      phone: "+91 88482 44939",
+
+      phoneHref: "tel:+918848244939",
+
+      mapsUrl:
+        "https://maps.app.goo.gl/ewZpfHeiiTRuP5F47?g_st=ic",
+
+      mapQuery:
+        "ZIN LABAN, Karuvarakundu, Kerala"
+
+    },
+
+    {
+      id: 2,
+
+      name: "Kalikavu",
+
+      phone: "+91 62352 44939",
+
+      phoneHref: "tel:+916235244939",
+
+      mapsUrl:
+        "https://share.google/UygjaB3tIm0Raf58n",
+
+      mapQuery:
+        "ZIN LABAN, Kalikavu, Kerala"
+
+    }
+
+  ];
+
+
+  function initLocation() {
+
+    const list =
+      document.getElementById(
+        "storeList"
+      );
+
+    const frame =
+      document.getElementById(
+        "storeMapFrame"
+      );
+
+    const infoLink =
+      document.getElementById(
+        "mapInfoLink"
+      );
+
+    const infoText =
+      document.getElementById(
+        "mapInfoText"
+      );
+
+    if (
+      !list ||
+      !frame
+    ) return;
+
+
+    let selected =
+      stores[0].id;
+
+
+    function render() {
+
+      list.innerHTML =
+        stores
+          .map(
+            function (store) {
+
+              return `
+
+                <article
+                  class="
+                    store-card
+                    ${
+                      selected === store.id
+                        ? "is-selected"
+                        : ""
+                    }
+                  "
+                  data-store-id="${store.id}"
+                >
+
+                  <h3
+                    class="store-card__name"
+                  >
+                    ${escapeHTML(store.name)}
+                  </h3>
+
+                  <a
+                    class="store-card__phone"
+                    href="${store.phoneHref}"
+                    onclick="event.stopPropagation()"
+                  >
+                    ${escapeHTML(store.phone)}
+                  </a>
+
+                </article>
+
+              `;
+
+            }
+          )
+          .join("");
+
+
+      list
+        .querySelectorAll(
+          ".store-card"
+        )
+        .forEach(
+          function (card) {
+
+            card.addEventListener(
+              "click",
+              function () {
+
+                selectStore(
+                  Number(
+                    card.dataset.storeId
+                  )
+                );
+
+              }
+            );
+
+          }
+        );
+
+    }
+
+
+    function selectStore(
+      id
+    ) {
+
+      const store =
+        stores.find(
+          function (item) {
+
+            return item.id === id;
+
+          }
+        );
+
+      if (!store) return;
+
+
+      selected =
+        store.id;
+
+
+      render();
+
+      updateMap(
+        store
+      );
+
+    }
+
+
+    function updateMap(
+      store
+    ) {
+
+      frame.src =
+        "https://www.google.com/maps?q=" +
+        encodeURIComponent(
+          store.mapQuery
+        ) +
+        "&output=embed";
+
+
+      if (infoLink) {
+
+        infoLink.href =
+          store.mapsUrl;
+
+      }
+
+
+      if (infoText) {
+
+        infoText.textContent =
+          `Open in Google Maps — ${store.name}`;
+
+      }
+
+    }
+
+
+    render();
+
+    selectStore(
+      stores[0].id
+    );
+
+  }
+
+
+  /* =========================================================
+     11. MASCOT FLOAT
      ========================================================= */
 
   function initMascotFloat() {

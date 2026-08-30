@@ -518,7 +518,7 @@
           >
 
             <div class="img-frame">
-              <img src="assets/story/story-01 (7).jpeg" alt="">
+              <img src="assets/story/shop1.jpeg" alt="">
             </div>
 
           </figure>
@@ -530,7 +530,7 @@
           >
 
             <div class="img-frame">
-              <img src="assets/story/story-01 (8).jpeg" alt="">
+              <img src="assets/story/shop2.jpeg" alt="">
             </div>
 
           </figure>
@@ -542,7 +542,7 @@
           >
 
             <div class="img-frame">
-              <img src="assets/story/story-01.jpg" alt="">
+              <img src="assets/story/shop3.jpeg" alt="">
             </div>
 
           </figure>
@@ -554,7 +554,7 @@
           >
 
             <div class="img-frame">
-              <img src="assets/story/story-02.jpg" alt="">
+              <img src="assets/story/shop4.jpeg" alt="">
             </div>
 
           </figure>
@@ -566,7 +566,7 @@
           >
 
             <div class="img-frame">
-              <img src="assets/story/story-03.jpg" alt="">
+              <img src="assets/story/shop1.jpeg" alt="">
             </div>
 
           </figure>
@@ -578,7 +578,7 @@
           >
 
             <div class="img-frame">
-              <img src="assets/story/story-04.jpg" alt="">
+              <img src="assets/story/shop2.jpeg" alt="">
             </div>
 
           </figure>
@@ -589,7 +589,7 @@
           >
 
             <div class="img-frame">
-              <img src="assets/story/story-05.jpg" alt="">
+              <img src="assets/story/shop3.jpeg" alt="">
             </div>
 
           </figure>
@@ -600,7 +600,7 @@
           >
 
             <div class="img-frame">
-              <img src="assets/story/story-06.jpg" alt="">
+              <img src="assets/story/shop4.jpeg" alt="">
             </div>
 
           </figure>
@@ -611,7 +611,7 @@
           >
 
             <div class="img-frame">
-              <img src="assets/story/story-brand.jpg" alt="">
+              <img src="assets/story/shop1.jpeg" alt="">
             </div>
 
           </figure>
@@ -938,17 +938,32 @@
             </label>
 
             <p class="store-finder__note">
-              Find us on Google Maps for directions,
-              opening hours and more.
+              Select a shop to view its exact
+              location on the map.
+            </p>
+
+          </div>
+
+
+          <div
+            class="store-list"
+            id="storeList"
+          >
+
+          </div>
+
+
+          <div class="store-finder__franchise">
+
+            <p class="store-finder__franchise-label">
+              Franchise
             </p>
 
             <a
-              href="https://maps.app.goo.gl/ewZpfHeiiTRuP5F47?g_st=ic"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn--map"
+              href="tel:+919544655287"
+              class="store-finder__franchise-phone"
             >
-              Open in Google Maps
+              +91 95446 55287
             </a>
 
           </div>
@@ -960,32 +975,13 @@
 
         <div class="store-map">
 
-          <div class="map-grid"></div>
-
-          <div class="map-road map-road--one"></div>
-          <div class="map-road map-road--two"></div>
-          <div class="map-road map-road--three"></div>
-
-          <div
-            class="map-center"
-            id="mapCenter"
-          >
-
-            <div class="map-center__pulse"></div>
-
-            <div class="map-center__pin">
-              Z
-            </div>
-
-          </div>
-
-
-          <div
-            class="map-label map-label--one"
-          >
-            ZIN LABAN
-          </div>
-
+          <iframe
+            id="storeMapFrame"
+            class="store-map__frame"
+            title="ZIN LABAN location map"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
 
           <a
             href="https://maps.app.goo.gl/ewZpfHeiiTRuP5F47?g_st=ic"
@@ -997,7 +993,7 @@
 
             <span class="map-info__dot"></span>
 
-            <span>
+            <span id="mapInfoText">
               Open in Google Maps
             </span>
 
